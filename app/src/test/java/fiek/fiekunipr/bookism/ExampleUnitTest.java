@@ -1,4 +1,4 @@
-package com.unipr.ebook;
+package fiek.fiekunipr.bookism;
 
 import org.junit.Test;
 
