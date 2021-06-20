@@ -20,12 +20,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        name = name.findViewById(R.id.name);
-        password = password.findViewById(R.id.password);
-        repass = password.findViewById(R.id.repassword);
-        surname = surname.findViewById(R.id.surname);
-        signIn = signIn.findViewById(R.id.btnsignup);
-        email = email.findViewById(R.id.email);
+        name = findViewById(R.id.nameEt);
+        password = findViewById(R.id.password);
+        repass = findViewById(R.id.repassword);
+        surname = findViewById(R.id.surname);
+        signIn = findViewById(R.id.btnsignup);
+        email = findViewById(R.id.email);
 
         String nameString = name.getText().toString().trim();
         String surnameS = surname.getText().toString().trim();

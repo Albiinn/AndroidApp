@@ -8,24 +8,26 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/nameEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_name"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="20dp"/>
     <EditText
         android:id="@+id/surname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_surname"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/nameEt"/>
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="@string/hint_email"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/surname"/>
 
     <EditText
         android:id="@+id/password"
@@ -33,8 +35,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/name"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/email"/>
 
     <EditText
         android:id="@+id/repassword"
@@ -42,7 +44,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_confirm_password"
         android:inputType="textPassword"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/password"/>
 
     <Button
@@ -51,6 +53,8 @@
         android:layout_height="wrap_content"
         android:text="@string/registerButton"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/button_bg_color"
+        android:textColor="@color/button_text_color"
         android:layout_below="@+id/repassword"/>
 
 
