@@ -4,9 +4,12 @@
     <string name="registerButton">Register</string>
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
+    <string name="already">Existing user! Go to Sign in page!</string>
     <string name="text_login">Login</string>
     <string name="text_register">Register</string>
     <string name="error_message_name">Enter Full Name</string>

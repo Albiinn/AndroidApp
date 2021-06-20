@@ -8,26 +8,39 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Name"
+        android:hint="@string/hint_name"
+        android:layout_marginTop="50dp"/>
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_surname"
+        android:layout_marginTop="50dp"/>
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/hint_email"
         android:layout_marginTop="50dp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Name"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/username"/>
+        android:layout_below="@id/name"/>
 
     <EditText
         android:id="@+id/repassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Name"
+        android:hint="@string/hint_confirm_password"
         android:inputType="textPassword"
         android:layout_marginTop="50dp"
         android:layout_below="@id/password"/>
@@ -36,16 +49,9 @@
         android:id="@+id/btnsignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/registerButton"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/repassword"/>
 
-    <Button
-        android:id="@+id/btnsignin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Existing user! Go to Sign in page!"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/btnsignup"/>
 
 </RelativeLayout>
