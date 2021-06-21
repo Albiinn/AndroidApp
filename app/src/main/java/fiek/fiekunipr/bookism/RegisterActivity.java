@@ -3,6 +3,7 @@ package fiek.fiekunipr.bookism;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,8 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(nameString) && !TextUtils.isEmpty(surnameS) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(reepass) && !TextUtils.isEmpty(sEmail)) {
-                    if (password.getText().toString().equals(repass.getText().toString())) {
+//                if (!TextUtils.isEmpty(nameString) && !TextUtils.isEmpty(surnameS) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(reepass) && !TextUtils.isEmpty(sEmail)) {
+//                    if (password.getText().toString().equals(repass.getText().toString())) {
                         SQLiteDatabase objDb = new DatabaseHelper(RegisterActivity.this).getWritableDatabase();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(DatabaseModelHelper.UsersName, name.getText().toString());
@@ -49,14 +50,17 @@ public class RegisterActivity extends AppCompatActivity {
                             long id = objDb.insert(DatabaseModelHelper.UsersTable, null, contentValues);
                             if (id > 0)
                                 Toast.makeText(RegisterActivity.this, getString(R.string.success_message), Toast.LENGTH_LONG).show();
+                            Intent feedActivity = new Intent(RegisterActivity.this, FeedActivity.class);
+                            startActivity(feedActivity);
+
                         } catch (Exception ex) {
                             Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                         } finally {
                             objDb.close();
                         }
                     }
-                }
-            }
+//                }
+//            }
         });
     }
 }

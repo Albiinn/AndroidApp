@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/GeneralMenu">
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:title="@string/home" />
+            <item
+                android:id="@+id/secondmenu"
+                android:title="@string/Contact" />
+        </menu>
+    </item>
+    <item android:title="@string/Share">
+        <menu>
+            <item
+                android:id="@+id/hometwo"
+                android:title="@string/Share" />
+            <item
+                android:id="@+id/homethree"
+                android:title="Item" />
+        </menu>
+    </item>
+</menu>
