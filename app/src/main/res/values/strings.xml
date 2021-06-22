@@ -31,4 +31,5 @@
     <string name="Contact">Contact</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="back">Go back</string>
 </resources>
