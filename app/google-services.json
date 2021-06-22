@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "757404618078",
-    "project_id": "bookism-d7237",
-    "storage_bucket": "bookism-d7237.appspot.com"
+    "project_number": "190310750508",
+    "project_id": "baba2-7ab0b",
+    "storage_bucket": "baba2-7ab0b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:757404618078:android:1753628704d0fb38e2d3cf",
+        "mobilesdk_app_id": "1:190310750508:android:0126763ad967af4c4c3489",
         "android_client_info": {
           "package_name": "fiek.fiekunipr.bookism"
         }
       },
       "oauth_client": [
         {
-          "client_id": "757404618078-mi58le6121gdc1bnd29fv61ukcvse49m.apps.googleusercontent.com",
+          "client_id": "190310750508-76gjuhu536dil9pikr5bgag6e75se6kg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA5WnvdpXyZkja7S5gOmu0UrMu-sElg9qU"
+          "current_key": "AIzaSyBWiN4nSkE8kIfkbsLFhqmV4aJwYBU11Z4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "757404618078-mi58le6121gdc1bnd29fv61ukcvse49m.apps.googleusercontent.com",
+              "client_id": "190310750508-76gjuhu536dil9pikr5bgag6e75se6kg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
