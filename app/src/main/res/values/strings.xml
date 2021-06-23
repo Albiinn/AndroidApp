@@ -32,4 +32,6 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="back">Go back</string>
+    <string name="thread">Practice</string>
+    <string name="thread1">Threads</string>
 </resources>

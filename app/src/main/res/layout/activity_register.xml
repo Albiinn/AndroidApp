@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@drawable/bg">
 
     <EditText
         android:id="@+id/nameEt"
@@ -58,6 +59,7 @@
         android:textColor="@color/button_text_color" />
     <TextView
         android:layout_width="wrap_content"
+        android:id="@+id/back"
         android:layout_height="match_parent"
         android:layout_below="@+id/btnsignup"
         android:text="@string/back"

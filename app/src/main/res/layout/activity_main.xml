@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/bg">
 
     <TextView
         android:id="@+id/textView"
@@ -25,7 +26,7 @@
     <Button
         android:id="@+id/loginButton"
         android:layout_width="115dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/button_bg_color"
         android:minWidth="9dp"
         android:text="@string/loginButton"
@@ -40,7 +41,7 @@
     <Button
         android:id="@+id/registerButton"
         android:layout_width="116dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/button_bg_color"
         android:minWidth="6.2dp"
         android:text="@string/registerButton"

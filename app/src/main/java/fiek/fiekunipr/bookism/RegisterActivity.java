@@ -14,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -33,6 +34,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 public class RegisterActivity extends AppCompatActivity {
     EditText name, surname, password, repass, email;
     Button signIn;
+    TextView tf1;
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -59,11 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
                 .requestEmail().build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(RegisterActivity.this, googleSignInOptions);
-
-
-
-
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,10 +73,18 @@ public class RegisterActivity extends AppCompatActivity {
 //
         });
 
+        tf1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -166,22 +171,24 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    UserHelper user = new UserHelper(nameString, surnameS, sEmail);
-                                    FirebaseDatabase.getInstance().getReference("Users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(user).addOnCompleteListener(task1 -> {
-                                        if(task1.isSuccessful()){
-                                            Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
-                                        }
-                                        else{
-                                            Toast.makeText(RegisterActivity.this, "Failed to Register", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
+                                    Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                 }
-                                else{
-                                    Log.d("MUTI", task.getException().getStackTrace().toString());
-                                    Toast.makeText(RegisterActivity.this, task.getException().getStackTrace().toString(), Toast.LENGTH_LONG).show();
-                                }
+//                                    UserHelper user = new UserHelper(nameString, surnameS, sEmail);
+//                                    FirebaseDatabase.getInstance().getReference("Users")
+//                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                            .setValue(user).addOnCompleteListener(task1 -> {
+//                                        if(task1.isSuccessful()){
+//                                            Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
+//                                        }
+//                                        else{
+//                                            Toast.makeText(RegisterActivity.this, "Failed to Register", Toast.LENGTH_LONG).show();
+//                                        }
+//                                    });
+//                                }
+//                                else{
+//                                    Log.d("MUTI", task.getException().getStackTrace().toString());
+//                                    Toast.makeText(RegisterActivity.this, task.getException().getStackTrace().toString(), Toast.LENGTH_LONG).show();
+//                                }
                             }
                         });
     }

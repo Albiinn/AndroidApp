@@ -1,5 +1,6 @@
 package fiek.fiekunipr.bookism;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,40 +8,81 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
-    EditText email, password;
+    EditText etemail, etpassword;
     Button loginButton;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = (EditText) findViewById(R.id.etEmail);
-        password = (EditText) findViewById(R.id.etPassword);
+        etemail = (EditText) findViewById(R.id.etEmail);
+        etpassword = (EditText) findViewById(R.id.etPassword);
         loginButton = (Button) findViewById(R.id.btnLogin);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        String email = etemail.toString().trim();
+        String pass = etpassword.toString().trim();
+
         loginButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
-                int retLogin = LoginUser(email.getText().toString(), password.getText().toString());
-                if(retLogin==1)
-                    Toast.makeText(LoginActivity.this, getString(R.string.user_not_found), Toast.LENGTH_LONG).show();
-                else if(retLogin == 0)
-                    Toast.makeText(LoginActivity.this, getString(R.string.error_valid_email_password), Toast.LENGTH_LONG).show();
-                else {
-                    Intent mainActivityIntent = new Intent(LoginActivity.this, FeedActivity.class);
-                    mainActivityIntent.putExtra("email", email.getText().toString());
-                    startActivity(mainActivityIntent);
+
+                if(email.isEmpty()) {
+                    etemail.setError("Name is required");
+                    etemail.requestFocus();
+                    return;
                 }
+                if(pass.isEmpty()) {
+                    etpassword.setError("Password is required");
+                    etpassword.requestFocus();
+                    return;
+                }
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etemail.setError("Enter right email");
+                    etemail.requestFocus();
+                    return;
+                }
+                if(pass.length()<6) {
+                    etpassword.setError("Password must be bigger than 6 characters");
+                    etpassword.requestFocus();
+                    return;
+                }
+
+                mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
     }
+
+
     protected void onResume() {
         super.onResume();
 
@@ -53,8 +95,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Setting the fetched data
         // in the EditTexts
-        email.setText(s1);
-        password.setText(s2);
+        etemail.setText(s1);
+        etpassword.setText(s2);
     }
     @Override
     protected void onPause() {
@@ -67,8 +109,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
         // write all the data entered by the user in SharedPreference and apply
-        myEdit.putString("email", email.getText().toString());
-        myEdit.putString("password", password.getText().toString());
+        myEdit.putString("email", etemail.getText().toString());
+        myEdit.putString("password", etpassword.getText().toString());
         myEdit.apply();
     }
 
@@ -77,32 +119,11 @@ public class LoginActivity extends AppCompatActivity {
     // When the user closes the application
     // onPause() will be called
     // and data will be stored
-    private int LoginUser(String email, String password)
-    {
-        SQLiteDatabase objDb = new DatabaseHelper(LoginActivity.this).getReadableDatabase();
-        Cursor cursor = objDb.query(DatabaseModelHelper.UsersTable, new String[]{DatabaseModelHelper.UsersEmail, DatabaseModelHelper.UsersPassword},DatabaseModelHelper.UsersEmail="?",
-                new String[]{email}, "","","");
 
-        if(cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            String dbUserMail = cursor.getString(0);
-            String dbUserPassword = cursor.getString(1);
 
-            cursor.close();
-            objDb.close();
-            if(password.equals(dbUserPassword))
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        return -1;
-    }
     public void openActivity2() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
 }

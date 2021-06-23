@@ -7,7 +7,8 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/bg">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
         android:textSize="22sp"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
+        android:hint="@string/hint_email"
         android:id="@+id/etEmail"></EditText>
     <TextView
         android:layout_width="wrap_content"
@@ -32,26 +34,27 @@
         android:textSize="22sp"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:hint="@string/hint_password"
         android:id="@+id/etPassword"></EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
-            android:text="@string/loginButton"
-            android:textSize="21sp"
             android:id="@+id/btnLogin"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:minWidth="9dp"
-            android:backgroundTint="@color/button_bg_color"
             android:layout_width="9dp"
-            android:layout_height="46dp"
-            android:textColor="@color/button_text_color"
-            android:paddingBottom="8dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            ></Button>
+            android:layout_weight="1"
+            android:backgroundTint="@color/button_bg_color"
+            android:minWidth="9dp"
+            android:paddingBottom="8dp"
+            android:text="@string/loginButton"
+            android:textColor="@color/button_text_color"
+            android:textSize="21sp"></Button>
     </LinearLayout>
 
 

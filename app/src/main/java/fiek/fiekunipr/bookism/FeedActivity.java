@@ -9,6 +9,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -50,12 +52,18 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.container_fragment, new MainFragment());
             fragmentTransaction.commit();
         }
-        if(item.getItemId() == R.id.hometwo) {
+        if(item.getItemId() == R.id.secondmenu) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, new FragmentSecond());
             fragmentTransaction.commit();
         }
+        if(item.getItemId() == R.id.hometwo) {
+            Intent intent = new Intent(FeedActivity.this, ThreadActivity.class);
+            startActivity(intent);
+        }
+
+
         return true;
     }
 
@@ -66,4 +74,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.container_fragment, new FragmentSecond());
         fragmentTransaction.commit();
     }
+
+
+
 }

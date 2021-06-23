@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/GeneralMenu">
+    <item
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/GeneralMenu">
         <menu>
             <item
                 android:id="@+id/home"
@@ -11,11 +13,13 @@
                 android:title="@string/Contact" />
         </menu>
     </item>
-    <item android:title="@string/Share">
+    <item
+        android:icon="@drawable/ic_baseline_data_usage_24"
+        android:title="@string/thread">
         <menu>
             <item
                 android:id="@+id/hometwo"
-                android:title="@string/Share" />
+                android:title="@string/thread1" />
             <item
                 android:id="@+id/homethree"
                 android:title="Item" />
