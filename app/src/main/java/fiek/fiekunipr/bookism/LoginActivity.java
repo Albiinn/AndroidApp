@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,9 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 if(pass.length()<6) {
-                    etpassword.setError("Password must be bigger than 6 characters");
-                    etpassword.requestFocus();
-                    return;
+//                    etpassword.setError("Password must be bigger than 6 characters");
+//                    etpassword.requestFocus();
+//                    return;
+                    Snackbar snackbar = Snackbar.make(v, "Password must be bigger than 6 characters", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+
                 }
 
                 mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
 
 
-
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN
         ).requestIdToken("190310750508-76gjuhu536dil9pikr5bgag6e75se6kg.apps.googleusercontent.com")
@@ -64,13 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 //                Intent intent = mGoogleSignInClient.getSignInIntent();
 //
 //                startActivityForResult(intent, 100);
-                    registerUser();
-                    }
-//
+                registerUser();
+            }
         });
 
         tf1.setOnClickListener(new View.OnClickListener() {
@@ -85,22 +83,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 100) {
             Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if(signInAccountTask.isSuccessful()) {
+            if (signInAccountTask.isSuccessful()) {
                 //String
-                
+
                 String s = "Google sign in successful";
                 Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
 
                 try {
                     GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
-                    if(googleSignInAccount != null) {
+                    if (googleSignInAccount != null) {
                         AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
                         mAuth.signInWithCredential(authCredential).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -109,8 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     //when task is successful
                                     Intent intent = new Intent(RegisterActivity.this, FeedActivity.class);
                                     Toast.makeText(RegisterActivity.this, "Boni", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
+                                } else {
                                     Toast.makeText(RegisterActivity.this, task.getException().getStackTrace().toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -130,49 +126,57 @@ public class RegisterActivity extends AppCompatActivity {
         String reepass = repass.getText().toString().trim();
         String sEmail = email.getText().toString().trim();
 
-        if(nameString.isEmpty()) {
+        if (nameString.isEmpty()) {
             name.setError("Name is required");
             name.requestFocus();
             return;
         }
-        if(surnameS.isEmpty()) {
+        if (surnameS.isEmpty()) {
             surname.setError("Surname is required");
             surname.requestFocus();
             return;
         }
-        if(pass.isEmpty()) {
+        if (pass.isEmpty()) {
             password.setError("Name is required");
             password.requestFocus();
             return;
         }
-        if(reepass.isEmpty()) {
+        if (reepass.isEmpty()) {
             repass.setError("Name is required");
             repass.requestFocus();
             return;
         }
-        if(sEmail.isEmpty()) {
+        if (sEmail.isEmpty()) {
             email.setError("Name is required");
             email.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(sEmail).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(sEmail).matches()) {
             email.setError("Enter right email");
             email.requestFocus();
             return;
         }
-        if(reepass.length()<6) {
+        if (reepass.length() < 6) {
             password.setError("Password must be bigger than 6 characters");
             password.requestFocus();
             return;
         }
 
+        if (!pass.equals(reepass)) {
+            Toast.makeText(RegisterActivity.this, "Password doesnt match ", Toast.LENGTH_LONG).show();
+        }
+
         mAuth.createUserWithEmailAndPassword(sEmail, pass)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
-                                }
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                            Log.e("FireBaseErrorRegister", task.getException().toString());
+
+                        }
 //                                    UserHelper user = new UserHelper(nameString, surnameS, sEmail);
 //                                    FirebaseDatabase.getInstance().getReference("Users")
 //                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -189,8 +193,8 @@ public class RegisterActivity extends AppCompatActivity {
 //                                    Log.d("MUTI", task.getException().getStackTrace().toString());
 //                                    Toast.makeText(RegisterActivity.this, task.getException().getStackTrace().toString(), Toast.LENGTH_LONG).show();
 //                                }
-                            }
-                        });
+                    }
+                });
     }
 }
 
