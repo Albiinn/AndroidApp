@@ -63,11 +63,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-// Mapbox access token is configured here. This needs to be called either in your application
-// object or in the same activity which contains the mapview.
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
-// This contains the MapView in XML and needs to be called after the access token is configured.
+        // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_circle_layer_clustering);
 
         mapView = findViewById(R.id.mapView);
@@ -83,8 +83,6 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
 
-// Disable any type of fading transition when icons collide on the map. This enhances the visual
-// look of the data clustering together and breaking apart.
                         style.setTransition(new TransitionOptions(0, 0, false));
 
                         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
@@ -107,11 +105,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
     private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
 
-// Add a new source from the GeoJSON data and set the 'cluster' option to true.
+            // Add a new source from the GeoJSON data and set the 'cluster' option to true.
         try {
             loadedMapStyle.addSource(
-// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
-// 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+            // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
+            // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
                     new GeoJsonSource("earthquakes",
                             new URI("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
                             new GeoJsonOptions()
@@ -124,7 +122,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
             Log.e("URISyntax", uriSyntaxException.getMessage());
         }
 
-//Creating a marker layer for single data points
+            //Creating a marker layer for single data points
         SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
 
         unclustered.setProperties(
@@ -145,8 +143,8 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         unclustered.setFilter(has("mag"));
         loadedMapStyle.addLayer(unclustered);
 
-// Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
-// Each point range gets a different fill color.
+        // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
+        // Each point range gets a different fill color.
         int[][] layers = new int[][] {
                 new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
                 new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
@@ -154,7 +152,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         };
 
         for (int i = 0; i < layers.length; i++) {
-//Add clusters' circles
+            //Add clusters' circles
             CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
             circles.setProperties(
                     circleColor(layers[i][1]),
@@ -163,7 +161,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
             Expression pointCount = toNumber(get("point_count"));
 
-// Add a filter to the cluster layer that hides the circles based on "point_count"
+            // Add a filter to the cluster layer that hides the circles based on "point_count"
             circles.setFilter(
                     i == 0
                             ? all(has("point_count"),
