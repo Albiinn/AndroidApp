@@ -53,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         surname = findViewById(R.id.surname);
         signIn = findViewById(R.id.btnsignup);
         email = findViewById(R.id.email);
+        signIn = findViewById(R.id.btnsignup);
 
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(

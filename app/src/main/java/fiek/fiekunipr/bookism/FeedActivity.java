@@ -62,8 +62,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(FeedActivity.this, ThreadActivity.class);
             startActivity(intent);
         }
-
-
         return true;
     }
 

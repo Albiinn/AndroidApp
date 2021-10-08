@@ -30,8 +30,6 @@ public class ThreadActivity extends AppCompatActivity {
                 async.execute();
             }
         });
-
-
     }
 
     private class Async extends AsyncTask<Void, Integer, String> {
@@ -67,6 +65,5 @@ public class ThreadActivity extends AppCompatActivity {
         }catch (InterruptedException e){
             Log.e("Thread1", e.getLocalizedMessage());
         }
-
     }
 }
