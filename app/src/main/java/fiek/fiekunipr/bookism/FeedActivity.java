@@ -39,8 +39,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
-
-
     }
 
     @Override
@@ -53,10 +51,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
         if(item.getItemId() == R.id.secondmenu) {
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, new FragmentSecond());
-            fragmentTransaction.commit();
+            Intent intent = new Intent(FeedActivity.this, CameraActivity.class);
+            startActivity(intent);
+//            fragmentManager = getSupportFragmentManager();
+//            fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.container_fragment, new FragmentSecond());
+//            fragmentTransaction.commit();
         }
         if(item.getItemId() == R.id.hometwo) {
             Intent intent = new Intent(FeedActivity.this, ThreadActivity.class);

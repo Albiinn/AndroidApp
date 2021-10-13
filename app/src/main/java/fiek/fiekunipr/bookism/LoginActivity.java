@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         String pass = etpassword.toString().trim();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
 
@@ -56,18 +51,17 @@ public class LoginActivity extends AppCompatActivity {
                     etpassword.requestFocus();
                     return;
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    etemail.setError("Enter right email");
-                    etemail.requestFocus();
-                    return;
-                }
+//                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                    etemail.setError("Enter right email");
+//                    etemail.requestFocus();
+//                    return;
+//                }
                 if(pass.length()<6) {
 //                    etpassword.setError("Password must be bigger than 6 characters");
 //                    etpassword.requestFocus();
 //                    return;
                     Snackbar snackbar = Snackbar.make(v, "Password must be bigger than 6 characters", Snackbar.LENGTH_SHORT);
                     snackbar.show();
-
                 }
 
                 mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -75,9 +69,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                            Intent feedActivity = new Intent(LoginActivity.this, FeedActivity.class);
+                            startActivity(feedActivity);
                         } else {
                             Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Intent feedActivity = new Intent(LoginActivity.this, FeedActivity.class);
+                            startActivity(feedActivity);
                         }
                     }
                 });
@@ -85,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     protected void onResume() {
         super.onResume();

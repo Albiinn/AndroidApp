@@ -14,7 +14,6 @@ public class ThreadActivity extends AppCompatActivity {
     Button bt1;
     TextView tf1;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +21,8 @@ public class ThreadActivity extends AppCompatActivity {
 
         bt1 = findViewById(R.id.btnAsync);
         tf1 = findViewById(R.id.tf1);
+
+
 
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,25 +33,27 @@ public class ThreadActivity extends AppCompatActivity {
         });
     }
 
-    private class Async extends AsyncTask<Void, Integer, String> {
+    private class Async extends AsyncTask<Void, String, String> {
 
         @Override
         protected void onPreExecute(){
-            tf1.setText("0");
+            sleepsecond();
+            tf1.setText("Welcome");
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            for(int i=1; i<=5; i++){
+            String[] welcome = {"to", "Bookism", "App", "!"};
+            for(String item : welcome) {
                 sleepsecond();
-                publishProgress(i);
+                publishProgress(item);
             }
-            return "Final";
+            return "Welcome to Bookism App";
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values){
-            tf1.setText(values[0].toString());
+        protected void onProgressUpdate(String... values){
+            tf1.setText(values[0]);
         }
 
         @Override
@@ -61,7 +64,7 @@ public class ThreadActivity extends AppCompatActivity {
 
     private void sleepsecond(){
         try{
-            Thread.sleep(1000);
+            Thread.sleep(700);
         }catch (InterruptedException e){
             Log.e("Thread1", e.getLocalizedMessage());
         }

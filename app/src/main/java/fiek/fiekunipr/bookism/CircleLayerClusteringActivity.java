@@ -86,7 +86,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
                         style.setTransition(new TransitionOptions(0, 0, false));
 
                         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                                12.099, -79.045), 3));
+                                42.8914, 20.8660), 5));
 
                         addClusteredGeoJsonSource(style);
                         style.addImage(

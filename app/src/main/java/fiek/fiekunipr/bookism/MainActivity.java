@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerActivityIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent registerActivityIntent = new Intent(MainActivity.this, CircleLayerClusteringActivity.class);
                 startActivity(registerActivityIntent);
             }
         });

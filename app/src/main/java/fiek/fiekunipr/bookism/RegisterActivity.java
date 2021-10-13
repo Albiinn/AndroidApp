@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         signIn = findViewById(R.id.btnsignup);
         email = findViewById(R.id.email);
         signIn = findViewById(R.id.btnsignup);
+        tf1 = findViewById(R.id.back);
 
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
@@ -75,7 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
         tf1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent mainActivity = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(mainActivity);
             }
         });
 

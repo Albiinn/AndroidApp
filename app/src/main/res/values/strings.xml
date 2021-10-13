@@ -34,7 +34,7 @@
     <string name="back">Go back</string>
     <string name="thread">Practice</string>
     <string name="thread1">Threads</string>
-    <string name="mapbox_access_token">pk.eyJ1Ijoia3JhbmtpdG8iLCJhIjoiY2txYXFrYjJsMG9sejJ1bGJqMXV3dmJhciJ9.Z171GAd9QC-Nd1ozYhc7mg</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibmlibGFjYXQiLCJhIjoiY2t1bWZjNjVjMXFzZTJ4bjZwazFjMzN3ayJ9.oKtYZ_71cRb83QXZ98WMXQ</string>
     <string name="camera">Open Camera</string>
     <string-array name="layer_spinner_array">
         <item>Water</item>
