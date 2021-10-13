@@ -1,2 +1,2 @@
+rootProject.name = "BookBlog"
 include ':app'
-rootProject.name = "Bookism"

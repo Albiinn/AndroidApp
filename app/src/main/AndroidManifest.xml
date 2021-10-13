@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fiek.fiekunipr.bookism">
+    package="com.unipr.bookblog">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,28 +14,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Bookism">
-        <activity
-            android:name=".CameraActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CircleLayerClusteringActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ThreadActivity"
-            android:exported="true" />
-        <activity
-            android:name=".FeedActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.BookBlog">
+        <activity android:name=".Activities.CircleLayerClusteringActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:theme="@style/Theme.BookBlog.NoActionBar" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.LoginActivity" />
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:theme="@style/Theme.BookBlog.NoActionBar" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.PostDetailActivity" />
     </application>
 
 </manifest>

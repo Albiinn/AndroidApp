@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admins>
+    <admin id="1">
+        <description>
+            Bookism
+        </description>
+        <item>
+            Version 1.0
+        </item>
+        <group>
+            CONNECT WITH US!
+        </group>
+        <email>
+            albin.bajrami1@student.uni-pr.edu
+        </email>
+        <website>
+            www.evaluo.world/
+        </website>
+        <youtube>
+            UCpkGXLwpVjhGtE-0u_qV6mA
+        </youtube>
+        <playstore>
+            com.unipr.bookblog
+        </playstore>
+        <instagram>
+            www.instagram.com/
+        </instagram>
+    </admin>
+</admins>
