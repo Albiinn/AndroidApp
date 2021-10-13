@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookBlog">
-        <activity android:name=".Activities.CircleLayerClusteringActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action
@@ -25,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity" />
         <activity
             android:name=".Activities.HomeActivity"
             android:theme="@style/Theme.BookBlog.NoActionBar" />
