@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.unipr.bookblog.Adapters.CommentAdapter;
 import com.unipr.bookblog.Models.Comment;
 import com.unipr.bookblog.R;
 
