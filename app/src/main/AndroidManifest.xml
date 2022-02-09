@@ -16,9 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookBlog">
         <activity android:name=".Activities.CircleLayerClusteringActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:exported="true" android:name=".Activities.MainActivity">
             <intent-filter>
                 <action
+                    android:exported="true"
                     android:name="android.intent.action.MAIN"
                     android:theme="@style/Theme.BookBlog.NoActionBar" />
 

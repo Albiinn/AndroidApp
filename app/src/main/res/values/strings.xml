@@ -10,7 +10,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoibmlibGFjYXQiLCJhIjoiY2t1bWZjNjVjMXFzZTJ4bjZwazFjMzN3ayJ9.oKtYZ_71cRb83QXZ98WMXQ</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibmlibGFjYXQiLCJhIjoiY2t6ZTNwamV4MGdidzMycGRiOTltNmt1biJ9.xrDU3TGQUlZCxKWDULKZjg</string>
 
     <string-array name="layer_spinner_array">
         <item>Water</item>

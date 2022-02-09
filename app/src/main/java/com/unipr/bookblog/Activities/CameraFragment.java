@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,83 +21,36 @@ import android.widget.Toast;
 
 import com.unipr.bookblog.R;
 
-import java.util.Objects;
+import lombok.NoArgsConstructor;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CameraFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+@NoArgsConstructor
 public class CameraFragment extends Fragment {
-
     private ImageView myImage;
-    private Button btn;
-    private Button btn2;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public CameraFragment() {
-
-    }
-
-    public static CameraFragment newInstance(String param1, String param2) {
-        CameraFragment fragment = new CameraFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{ Manifest.permission.CAMERA}, 100);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, 100);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-//        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(requireActivity(), new String[]{ Manifest.permission.CAMERA}, 100);
-//        }
-
         View fragmentView = inflater.inflate(R.layout.fragment_camera, container, false);
-
-        btn = (Button) fragmentView.findViewById(R.id.buttoncamera);
-        btn2 = (Button) fragmentView.findViewById(R.id.buttonback);
+        Button btn = (Button) fragmentView.findViewById(R.id.buttoncamera);
+        Button btn2 = (Button) fragmentView.findViewById(R.id.buttonback);
         myImage = (ImageView) fragmentView.findViewById(R.id.imageView);
 
-//        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(requireActivity(), new String[]{ Manifest.permission.CAMERA}, 100);
-//        }
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Open Camera
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 100);
-            }
+        btn.setOnClickListener(v -> {
+            //Open Camera
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 100);
         });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), HomeActivity.class);
-                startActivity(intent);
-            }
+        btn2.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HomeActivity.class);
+            startActivity(intent);
         });
 
         return fragmentView;

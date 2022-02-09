@@ -14,9 +14,7 @@ import android.widget.TextView;
 import com.unipr.bookblog.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static int SPLASH_SCREEN = 5000;
-
+    private static final int SPLASH_SCREEN = 5000;
     Animation topAnim, bottomAnim;
     ImageView image;
     TextView logo, slogan;
@@ -38,13 +36,10 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(bottomAnim);
         slogan.setAnimation(bottomAnim);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent login = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(login);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent login = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(login);
+            finish();
         }, SPLASH_SCREEN);
     }
 }

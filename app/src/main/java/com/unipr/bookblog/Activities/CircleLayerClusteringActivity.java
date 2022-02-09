@@ -14,7 +14,6 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
@@ -25,12 +24,11 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 import com.unipr.bookblog.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import java.util.Objects;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
@@ -59,56 +57,33 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
  * Use GeoJSON and circle layers to visualize point data as circle clusters.
  */
 public class CircleLayerClusteringActivity extends AppCompatActivity {
-
     private MapView mapView;
     private MapboxMap mapboxMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
-
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_circle_layer_clustering);
-
         mapView = findViewById(R.id.mapView);
-
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap map) {
-
-                mapboxMap = map;
-
-                map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                        style.setTransition(new TransitionOptions(0, 0, false));
-
-                        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                                42.8914, 20.8660), 6));
-
-                        addClusteredGeoJsonSource(style);
-                        style.addImage(
-                                "cross-icon-id",
-                                BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.ic_cross)),
-                                true
-                        );
-
-                        Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+        mapView.getMapAsync(map -> {
+            mapboxMap = map;
+            map.setStyle(Style.LIGHT, style -> {
+                style.setTransition(new TransitionOptions(0, 0, false));
+                mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                        42.8914, 20.8660), 6));
+                addClusteredGeoJsonSource(style);
+                style.addImage("cross-icon-id",Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.ic_cross))),true);
+                Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,Toast.LENGTH_SHORT).show();
+            });
         });
     }
 
     private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
-
         // Add a new source from the GeoJSON data and set the 'cluster' option to true.
         try {
             loadedMapStyle.addSource(
@@ -131,13 +106,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
         unclustered.setProperties(
                 iconImage("cross-icon-id"),
-                iconSize(
-                        division(
-                                get("mag"), literal(4.0f)
-                        )
-                ),
+                iconSize(division(get("mag"), literal(4.0f))),
                 iconColor(
-                        interpolate(exponential(1), get("mag"),
+                        interpolate(
+                                exponential(1),
+                                get("mag"),
                                 stop(2.0, rgb(0, 255, 0)),
                                 stop(4.5, rgb(0, 0, 255)),
                                 stop(7.0, rgb(255, 0, 0))
@@ -149,10 +122,10 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
         // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
         // Each point range gets a different fill color.
-        int[][] layers = new int[][] {
-                new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
-                new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
-                new int[] {0, ContextCompat.getColor(this, R.color.mapbox_blue)}
+        int[][] layers = new int[][]{
+                new int[]{150, ContextCompat.getColor(this, R.color.mapboxRed)},
+                new int[]{20, ContextCompat.getColor(this, R.color.mapboxGreen)},
+                new int[]{0, ContextCompat.getColor(this, R.color.mapbox_blue)}
         };
 
         for (int i = 0; i < layers.length; i++) {
@@ -227,7 +200,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
